@@ -1,12 +1,18 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
   <PropertyGroup>
-    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);GetMyPackageFiles</TargetsForTfmSpecificBuildOutput>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificBuildOutput);GetMyPackageFiles</TargetsForTfmSpecificContentInPackage>
   </PropertyGroup>
   <Target Name="GetMyPackageFiles">
     <ItemGroup>
-      <BuildOutputInPackage Include="tools/DotnetToolSettings.xml">
-        <FinalOutputPath>DotnetToolSettings.xml</FinalOutputPath>
-      </BuildOutputInPackage>
+      <TfmSpecificPackageFile  Include="DotnetToolSettings.xml">
+        <PackagePath>tools/DotnetToolSettings.xml</PackagePath>
+      </TfmSpecificPackageFile>
     </ItemGroup>
   </Target>
 </Project>
+
+
+<!--Error out C:\Program Files\dotnet\sdk\2.1.3\Sdks\NuGet.Build.Tasks.Pack\buildCrossTargeting\NuGet.Build.Tasks.Pack.targets(204,5): warning
+: File 'C:\work\testpack00\DotnetToolSettings.xml' 
+is not added because the package already contains file 
+'tools\DotnetToolSettings.xml' [C:\work\testpack00\consoledemo.csproj]-->
