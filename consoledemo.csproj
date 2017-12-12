@@ -1,24 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="toolpack.target" />
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp1.0;netstandard1.4</TargetFrameworks>
     <AssemblyName>consoledemo</AssemblyName>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);GetMyPackageFiles</TargetsForTfmSpecificContentInPackage>
-  </PropertyGroup>
-
-  <Target Name="GetMyPackageFiles">
-    <ItemGroup>
-      <TfmSpecificPackageFile Include="DotnetToolSettings.xml">
-        <PackagePath>tools</PackagePath>
-      </TfmSpecificPackageFile>
-    </ItemGroup>
-  </Target>
-
 </Project>
