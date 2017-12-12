@@ -1,14 +1,15 @@
 <Project>
   <PropertyGroup>
-    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificBuildOutput);GetMyPackageFiles</TargetsForTfmSpecificContentInPackage>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificBuildOutput)</TargetsForTfmSpecificContentInPackage>
   </PropertyGroup>
-  <Target Name="GetMyPackageFiles">
+ 
     <ItemGroup>
-      <TfmSpecificPackageFile  Include="DotnetToolSettings.xml">
-        <PackagePath>tools/DotnetToolSettings.xml</PackagePath>
-      </TfmSpecificPackageFile>
-    </ItemGroup>
-  </Target>
+    <_PackageFiles Include="DotnetToolSettings.xml">
+      <PackagePath>tools/DotnetToolSettings.xml</PackagePath>
+      <BuildAction>none</BuildAction>
+ 	  </_PackageFiles>
+   </ItemGroup>
+ 
 </Project>
 
 
