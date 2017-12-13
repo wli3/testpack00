@@ -1,15 +1,16 @@
 <Project>
   <PropertyGroup>
-    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificBuildOutput)</TargetsForTfmSpecificContentInPackage>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificBuildOutput);GetMyPackageFiles</TargetsForTfmSpecificContentInPackage>
   </PropertyGroup>
- 
+  <Target Name="GetMyPackageFiles" DependsOnTargets="Publish">  
+  
+  <!-- it will run every TFM and excatly what I want. And let's see if Publish output itemgroup. Directly pipe item group to  -->
     <ItemGroup>
-    <_PackageFiles Include="DotnetToolSettings.xml">
-      <PackagePath>tools/DotnetToolSettings.xml</PackagePath>
-      <BuildAction>none</BuildAction>
- 	  </_PackageFiles>
-   </ItemGroup>
- 
+      <TfmSpecificPackageFile Include="DotnetToolSettings.xml">
+        <PackagePath>tools/$(targetframework)/aa.xml</PackagePath>
+      </TfmSpecificPackageFile>
+    </ItemGroup>
+  </Target>
 </Project>
 
 
