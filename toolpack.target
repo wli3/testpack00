@@ -3,16 +3,16 @@
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificBuildOutput);GetMyPackageFiles</TargetsForTfmSpecificContentInPackage>
   </PropertyGroup>
   <Target Name="GetMyPackageFiles" DependsOnTargets="Publish">
-
+    <ItemGroup>
+      <TfmSpecificPackageFiles Include="$(PublishDir)/**/*.*"/>
+    </ItemGroup>
     <!--All published file in different tools/tfm-->
     <ItemGroup>
-      <TfmSpecificPackageFile Include="$(PublishDir)/**/*.*">
-        <PackagePath>tools/$(targetframework)</PackagePath>
+      <TfmSpecificPackageFile Include="@(TfmSpecificPackageFiles)">
+        <PackagePath>tools/$(targetframework)/%(TfmSpecificPackageFiles.RecursiveDir)%(TfmSpecificPackageFiles.Filename)%(TfmSpecificPackageFiles.Extension)</PackagePath>
       </TfmSpecificPackageFile>
     </ItemGroup>
   </Target>
-
-
   <!--settings file-->
   <ItemGroup>
     <_PackageFiles Include="DotnetToolSettings.xml">
