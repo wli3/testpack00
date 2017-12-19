@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace consoledemo
 {
@@ -8,8 +8,11 @@ namespace consoledemo
     {
         static void Main(string[] args)
         {
-            var greeting = "Hello World from Global Tool";
-            Console.WriteLine(greeting);
+            Console.WriteLine(JsonConvert.SerializeObject(
+                new
+                {
+                    Greeting = "Hello World from Global Tool"
+                }));
         }
     }
 }
