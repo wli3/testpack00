@@ -3,9 +3,13 @@
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificBuildOutput);GetMyPackageFiles</TargetsForTfmSpecificContentInPackage>
   </PropertyGroup>
   <Target Name="GetMyPackageFiles" DependsOnTargets="Publish">
-    <ItemGroup>
-      <TfmSpecificPackageFiles Include="$(PublishDir)/**/*.*"/>
+    <ItemGroup>  
+      <TfmSpecificPackageFile Include="@(ResolvedFileToPublish->'$(PublishDir)%(RelativePath)')">
+      </TfmSpecificPackageFile>
+
+      <GLOBTfmSpecificPackageFiles Include="$(PublishDir)/**/*.*"/>
     </ItemGroup>
+
     <!--All published file in different tools/tfm-->
     <ItemGroup>
       <TfmSpecificPackageFile Include="@(TfmSpecificPackageFiles)">
