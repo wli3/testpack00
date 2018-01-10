@@ -1,22 +1,20 @@
 <Project>
   <PropertyGroup>
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificBuildOutput);GetMyPackageFiles</TargetsForTfmSpecificContentInPackage>
+    <PackageType>DotnetTool</PackageType>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
   <Target Name="GetMyPackageFiles" DependsOnTargets="Publish">
-    <ItemGroup>  
-      <TfmSpecificPackageFile Include="@(ResolvedFileToPublish->'$(PublishDir)%(RelativePath)')">
-      </TfmSpecificPackageFile>
-
-      <GLOBTfmSpecificPackageFiles Include="$(PublishDir)/**/*.*"/>
-    </ItemGroup>
 
     <!--All published file in different tools/tfm-->
     <ItemGroup>
-      <TfmSpecificPackageFile Include="@(TfmSpecificPackageFiles)">
-        <PackagePath>tools/$(targetframework)/%(TfmSpecificPackageFiles.RecursiveDir)%(TfmSpecificPackageFiles.Filename)%(TfmSpecificPackageFiles.Extension)</PackagePath>
+      <TfmSpecificPackageFile Include="$(PublishDir)/**/*.*">
+        <PackagePath>tools/$(targetframework)/any</PackagePath>
       </TfmSpecificPackageFile>
     </ItemGroup>
   </Target>
+
+
   <!--settings file-->
   <ItemGroup>
     <_PackageFiles Include="DotnetToolSettings.xml">
@@ -24,4 +22,13 @@
       <BuildAction>none</BuildAction>
     </_PackageFiles>
   </ItemGroup>
+
+   <ItemGroup>
+     <PackageReference Update="@(PackageReference)">
+       <PrivateAssets>All</PrivateAssets>
+       <Publish Condition=" '%(PackageReference.Publish)' != 'false' ">true</Publish>
+     </PackageReference>
+
+     <PackageReference Include="Microsoft.NETCore.Platforms" Version="$(NETCorePlatformsImplicitPackageVersion)" />
+   </ItemGroup>
 </Project>
